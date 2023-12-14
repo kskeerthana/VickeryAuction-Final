@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { ethers } from 'ethers';
 import logo from './logo.svg';
 import './App.css';
+import CreateAuction from './components/AuctionCreation/CreateAuction';
 
 declare global {
   interface Window {
@@ -48,7 +49,7 @@ function App() {
         ) : (
           <button className="button" onClick={connectWallet}>Connect</button>
         )}
-        <button className="button">Interact</button>
+        <button className="button" onClick={CreateAuction}>Interact</button>
         <button className="button">Auctions</button>
       </div>
     </div>
