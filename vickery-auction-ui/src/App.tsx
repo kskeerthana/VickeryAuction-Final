@@ -3,6 +3,12 @@ import { ethers } from 'ethers';
 import logo from './logo.svg';
 import './App.css';
 
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+
 function App() {
   const [userAddress, setUserAddress] = useState('');
 
@@ -19,6 +25,7 @@ function App() {
     } else {
       console.error("Non-Ethereum browser detected. You should consider trying MetaMask!");
     }
+    console.log("trying to connect");
   };
 
   const disconnectWallet = () => {
