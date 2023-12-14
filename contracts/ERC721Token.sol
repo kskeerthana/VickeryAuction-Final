@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract ERC721Token is ERC721 {
     constructor() ERC721("ERC721Token", "M721") {
-        _mint(msg.sender, 1); // Mint token with ID 1
-        _mint(msg.sender, 2); // Mint token with ID 2
-        _mint(msg.sender, 3); // Mint token with ID 3
+        _mint(msg.sender, 1); 
+        _mint(msg.sender, 2);
+        _mint(msg.sender, 3);
     }
 }
