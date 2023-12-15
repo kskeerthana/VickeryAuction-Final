@@ -26,7 +26,7 @@ function CreateAuction() {
   const createAuction = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(yourContractAddress, VickreyAuction.abi, signer);
+      const contract = new ethers.Contract(contractAddress, VickreyAuction.abi, signer);
       try {
         // const tokenId = document.getElementById("tokenId") as HTMLInputElement;
         // const startTime = document.getElementById("startTime") as HTMLInputElement;
