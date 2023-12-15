@@ -3,7 +3,7 @@ import './CreateAuction.css';
 import { ethers } from 'ethers';
 import contractsData from '../../contractsConfig.json';
 import VickreyAuction from '../../VickeryAuction.json';
-const yourContractAddress = "0x822dF9c648F1D6A25c632908C7Eb1968531F1Ef4"; 
+const yourContractAddress = "0xeC3Ca7cB7015159c65fcB4A8fBCD46De4BeD1323"; 
 
 
 function CreateAuction() {
@@ -26,7 +26,7 @@ function CreateAuction() {
   const createAuction = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, VickreyAuction.abi, signer);
+      const contract = new ethers.Contract(yourContractAddress, VickreyAuction.abi, signer);
       try {
         // const tokenId = document.getElementById("tokenId") as HTMLInputElement;
         // const startTime = document.getElementById("startTime") as HTMLInputElement;
@@ -51,12 +51,8 @@ function CreateAuction() {
         const auctionRevealPeriod = ethers.utils.defaultAbiCoder.encode(['uint32'], [RevealPeriod]);
         let ReservePrice = 1000;
         const auctionReservePrice = ethers.utils.defaultAbiCoder.encode(['uint96'], [ReservePrice]);
-        const auctionselectedErc721 = ethers.utils.defaultAbiCoder.encode(['address'], [selectedErc721]);
-        const auctionselectedErc20 = ethers.utils.defaultAbiCoder.encode(['address'], [selectedErc20]);
-
-        console.log(auctiontokenID, auctionStartTime, auctionBidPeriod, auctionRevealPeriod, auctionReservePrice, auctionselectedErc721, auctionselectedErc20)
-
-        await contract.createAuction(auctionselectedErc721, auctiontokenID, auctionselectedErc20, auctionStartTime, auctionBidPeriod, auctionRevealPeriod, auctionReservePrice);
+        
+        await contract.createAuction(selectedErc721, auctiontokenID, selectedErc20, auctionStartTime, auctionBidPeriod, auctionRevealPeriod, auctionReservePrice);
 
         window.alert(`Auction created for: ${selectedErc721}`);
 
