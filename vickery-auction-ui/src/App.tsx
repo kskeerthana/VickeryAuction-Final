@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import logo from './logo.svg';
 import './App.css';
 import CreateAuction from './components/AuctionCreation/CreateAuction';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -34,25 +35,32 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <div className="header">
-        {userAddress && <p className="user-address">Connected: {userAddress}</p>}
-      </div>
+    <Router>
+      <div className="app-container">
+        <div className="header">
+          {userAddress && <p className="user-address">Connected: {userAddress}</p>}
+        </div>
 
-      <h1 className="title">Vickery Auction</h1>
-      <p className="description">
-        Hello! 👋 - <span>Place your best bids here!</span>
-      </p>
-      <div className="buttons-container">
-        {userAddress ? (
-          <button className="button" onClick={disconnectWallet}>Disconnect</button>
-        ) : (
-          <button className="button" onClick={connectWallet}>Connect</button>
-        )}
-        <button className="button" onClick={CreateAuction}>Interact</button>
-        <button className="button">Auctions</button>
+        <h1 className="title">Vickery Auction</h1>
+        <p className="description">
+          Hello! 👋 - <span>Place your best bids here!</span>
+        </p>
+        <div className="buttons-container">
+          {userAddress ? (
+            <button className="button" onClick={disconnectWallet}>Disconnect</button>
+          ) : (
+            <button className="button" onClick={connectWallet}>Connect</button>
+          )}
+          <Link to="/create">
+            <button className="button">Interact</button>
+          </Link>
+          <Routes>
+            <Route path="/create" element={<CreateAuction />} />
+          </Routes>
+          <button className="button">Auctions</button>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
