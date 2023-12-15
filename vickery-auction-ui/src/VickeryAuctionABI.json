@@ -1,0 +1,499 @@
+[
+	{
+		"inputs": [],
+		"name": "InvalidInitialization",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotInitializing",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "AuctionEnded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes20",
+				"name": "commitment",
+				"type": "bytes20"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "erc20Tokens",
+				"type": "uint256"
+			}
+		],
+		"name": "BidCommitted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint96",
+				"name": "bidValue",
+				"type": "uint96"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "nonce",
+				"type": "bytes32"
+			}
+		],
+		"name": "BidRevealed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint64",
+				"name": "auctionIndex",
+				"type": "uint64"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint96",
+				"name": "collateralAmount",
+				"type": "uint96"
+			}
+		],
+		"name": "CollateralWithdrawn",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint64",
+				"name": "version",
+				"type": "uint64"
+			}
+		],
+		"name": "Initialized",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes20",
+				"name": "commitment",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "uint256",
+				"name": "erc20Tokens",
+				"type": "uint256"
+			}
+		],
+		"name": "commitBid",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "erc20Token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint32",
+				"name": "startTime",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "bidPeriod",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "revealPeriod",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint96",
+				"name": "reservePrice",
+				"type": "uint96"
+			}
+		],
+		"name": "createAuction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "endAuction",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint96",
+				"name": "bidValue",
+				"type": "uint96"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "nonce",
+				"type": "bytes32"
+			}
+		],
+		"name": "revealBid",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint64",
+				"name": "auctionIndex",
+				"type": "uint64"
+			}
+		],
+		"name": "withdrawCollateral",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "auctions",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "seller",
+				"type": "address"
+			},
+			{
+				"internalType": "uint32",
+				"name": "startTime",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "endOfBiddingPeriod",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint32",
+				"name": "endOfRevealPeriod",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint64",
+				"name": "numUnrevealedBids",
+				"type": "uint64"
+			},
+			{
+				"internalType": "uint96",
+				"name": "highestBid",
+				"type": "uint96"
+			},
+			{
+				"internalType": "uint96",
+				"name": "secondHighestBid",
+				"type": "uint96"
+			},
+			{
+				"internalType": "address",
+				"name": "highestBidder",
+				"type": "address"
+			},
+			{
+				"internalType": "uint64",
+				"name": "index",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "erc20Token",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint64",
+				"name": "",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "bids",
+		"outputs": [
+			{
+				"internalType": "bytes20",
+				"name": "commitment",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "uint96",
+				"name": "collateral",
+				"type": "uint96"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getAuction",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "seller",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "startTime",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "endOfBiddingPeriod",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "endOfRevealPeriod",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint64",
+						"name": "numUnrevealedBids",
+						"type": "uint64"
+					},
+					{
+						"internalType": "uint96",
+						"name": "highestBid",
+						"type": "uint96"
+					},
+					{
+						"internalType": "uint96",
+						"name": "secondHighestBid",
+						"type": "uint96"
+					},
+					{
+						"internalType": "address",
+						"name": "highestBidder",
+						"type": "address"
+					},
+					{
+						"internalType": "uint64",
+						"name": "index",
+						"type": "uint64"
+					},
+					{
+						"internalType": "address",
+						"name": "erc20Token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct TokenizedVickeryAuction.Auction",
+				"name": "auction",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
