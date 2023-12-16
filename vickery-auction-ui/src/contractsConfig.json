@@ -1,13 +1,13 @@
 {
   "erc721Contracts": [
     {
-      "address": "0xc578a569eac25b92152bdaf1ffdb9baefb6fa547",
+      "address": "0xd410B199Ec1855B1638bf6E6a5C9Ba4b6da02A3e",
       "name": "ERC721 Contract 1"
     }
   ],
   "erc20Contracts": [
     {
-      "address": "0xF35044ff69CFe33e21B6F980FCEB89beb4F46A24",
+      "address": "0x07cfd6398420797ece7e51Ed41477bcf36263621",
       "name": "ERC20 Contract 1"
     }
   ]

@@ -41,7 +41,7 @@ function CreateAuction() {
         // const auctionReservePrice = reservePrice.value;
 
         
-        let tokenID = 1;
+        let tokenID = 12345678;
         const auctiontokenID = ethers.utils.defaultAbiCoder.encode(['uint256'], [tokenID]);
         let StartTime = 60;
         const auctionStartTime = ethers.utils.defaultAbiCoder.encode(['uint32'], [StartTime]);
