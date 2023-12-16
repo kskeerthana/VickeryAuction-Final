@@ -64,40 +64,40 @@ const VickeryAuctionTable = ({ }) => {
       window.alert('Error submitting bid. Please try again.');
     }
   };
-
+  
   return (
     <>
-    <div className="vickery-auction-table-container">
-      {isLoading ? <p>Loading...</p> :
-        <table className="table table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th className='text-center'>NFT ID</th>
-              <th className='text-center'>Auction Status</th>
-              <th className='text-center'>Start Time</th>
-              <th className='text-center'>Time Left</th>
-              <th className='text-center'>Number of Bids</th>
-              <th className='text-center'>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {auctions.map((auction, index) => (
-              <tr key={index}>
-                <td className='text-center'>{auction.tokenId}</td>
-                <td className='text-center'>{auction.isAuctionOpen ? "Open" : "Closed"}</td>
-                <td className='text-center'>{new Date(auction.startTime * 1000).toLocaleString()}</td>
-                <td className='text-center'>{auction.timeLeft > 0 ? `${auction.timeLeft} seconds` : "Closed"}</td>
-                <td className='text-center'>{auction.numUnrevealedBids}</td>
-                <td className='text-center'>
-                  {auction.isAuctionOpen && (
-                    <button className='btn btn-primary' onClick={() => handleBidSubmit(auction)}>Submit Bid</button>
-                  )}
-                </td>
+      <div className="vickery-auction-table-container">
+        {isLoading ? <p>Loading...</p> :
+          <table className="table table-bordered table-responsive">
+            <thead>
+              <tr>
+                <th className='text-center'>NFT ID</th>
+                <th className='text-center'>Auction Status</th>
+                <th className='text-center'>Start Time</th>
+                <th className='text-center'>Time Left</th>
+                <th className='text-center'>Number of Bids</th>
+                <th className='text-center'>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      }
+            </thead>
+            <tbody>
+              {auctions.map((auction, index) => (
+                <tr key={index}>
+                  <td className='text-center'>{auction.tokenId}</td>
+                  <td className='text-center'>{auction.isAuctionOpen ? "Open" : "Closed"}</td>
+                  <td className='text-center'>{new Date(auction.startTime * 1000).toLocaleString()}</td>
+                  <td className='text-center'>{auction.timeLeft > 0 ? `${auction.timeLeft} seconds` : "Closed"}</td>
+                  <td className='text-center'>{auction.numUnrevealedBids}</td>
+                  <td className='text-center'>
+                    {auction.isAuctionOpen && (
+                      <button className='btn btn-primary' onClick={() => handleBidSubmit(auction)}>Submit Bid</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        }
       </div>
     </>
   );

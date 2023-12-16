@@ -58,7 +58,6 @@ function App() {
           <Link to="/auctionsTable">
             <button className="button">Auctions</button>
           </Link>
-          
         </div>
         <Routes>
             <Route path="/create" element={<CreateAuction />} />

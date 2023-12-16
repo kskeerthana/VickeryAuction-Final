@@ -44,21 +44,10 @@ function CreateAuction() {
         const auctionBidPeriod = ethers.utils.defaultAbiCoder.encode(['uint32'], [bidPeriod]);
         const auctionRevealPeriod = ethers.utils.defaultAbiCoder.encode(['uint32'], [revealPeriod]);
         const auctionReservePrice = ethers.utils.defaultAbiCoder.encode(['uint96'], [reservePrice]);
-
-
         
-        // let tokenID = 12345678;
-        // const auctiontokenID = ethers.utils.defaultAbiCoder.encode(['uint256'], [tokenID]);
-        // let StartTime = 60;
-        // const auctionStartTime = ethers.utils.defaultAbiCoder.encode(['uint32'], [StartTime]);
-        // let BidPeriod = 60;
-        // const auctionBidPeriod = ethers.utils.defaultAbiCoder.encode(['uint32'], [BidPeriod]);
-        // let RevealPeriod = 60;
-        // const auctionRevealPeriod = ethers.utils.defaultAbiCoder.encode(['uint32'], [RevealPeriod]);
-        // let ReservePrice = 1000;
-        // const auctionReservePrice = ethers.utils.defaultAbiCoder.encode(['uint96'], [ReservePrice]);
+        const tx = await contract.createAuction(selectedErc721, auctionTokenID, selectedErc20, auctionStartTime, auctionBidPeriod, auctionRevealPeriod, auctionReservePrice);
         
-        await contract.createAuction(selectedErc721, auctionTokenID, selectedErc20, auctionStartTime, auctionBidPeriod, auctionRevealPeriod, auctionReservePrice);
+        await tx.wait();    
 
         window.alert(`Auction created for: ${selectedErc721}`);
 
