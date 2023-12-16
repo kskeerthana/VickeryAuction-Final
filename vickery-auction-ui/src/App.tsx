@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import logo from './logo.svg';
 import './App.css';
 import CreateAuction from './components/AuctionCreation/CreateAuction';
+import VickeryAuctionTable from './components/AuctionCreation/FetchAuctions';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 declare global {
@@ -13,7 +14,7 @@ declare global {
 
 function App() {
   const [userAddress, setUserAddress] = useState('');
-
+  const contractAddress = "0xeC3Ca7cB7015159c65fcB4A8fBCD46De4BeD1323"; 
   const connectWallet = async () => {
     if (window.ethereum) {
       try {
@@ -54,11 +55,17 @@ function App() {
           <Link to="/create">
             <button className="button">Interact</button>
           </Link>
-          <Routes>
-            <Route path="/create" element={<CreateAuction />} />
-          </Routes>
-          <button className="button">Auctions</button>
+          <Link to="/auctionsTable">
+            <button className="button">Auctions</button>
+          </Link>
+          
         </div>
+        <Routes>
+            <Route path="/create" element={<CreateAuction />} />
+        </Routes>
+        <Routes>
+            <Route path="/auctionsTable" element={ <VickeryAuctionTable contractAddress={contractAddress} />} />
+        </Routes>
       </div>
     </Router>
   );
