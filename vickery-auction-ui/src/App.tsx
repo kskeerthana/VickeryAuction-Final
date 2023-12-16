@@ -64,7 +64,7 @@ function App() {
             <Route path="/create" element={<CreateAuction />} />
         </Routes>
         <Routes>
-            <Route path="/auctionsTable" element={ <VickeryAuctionTable contractAddress={contractAddress} />} />
+            <Route path="/auctionsTable" element={ <VickeryAuctionTable />} />
         </Routes>
       </div>
     </Router>

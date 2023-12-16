@@ -2,9 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import './VickeryAuctionTable.css';
 import TokenizedVickeryAuctionArtifact from '../../VickeryAuction.json';
+import contractsData from '../../contractsConfig.json';
+const contractAddress = "0xeC3Ca7cB7015159c65fcB4A8fBCD46De4BeD1323"; 
 
-const VickeryAuctionTable = ({ contractAddress }) => {
-  const [auctions, setAuctions] = useState([]);
+interface Auction {
+  // Define the properties of an auction based on your contract
+  // For example:
+  tokenId: number;
+  startTime: number;
+  endOfRevealPeriod: number;
+  isAuctionOpen: boolean;
+  timeLeft: number;
+  numUnrevealedBids: number;
+  // Add other properties as needed
+}
+
+const VickeryAuctionTable = ({ }) => {
+  const [auctions, setAuctions] = useState<Auction[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -16,8 +30,8 @@ const VickeryAuctionTable = ({ contractAddress }) => {
 
         // Example: Fetch a list of token IDs (adjust based on your contract's data structure)
         const tokenIds = [12345678];
-        const fetchedAuctions = await Promise.all(tokenIds.map(async (tokenId) => {
-          const auction = await contract.getAuction(contractAddress, tokenId);
+        const fetchedAuctions: Auction[] = await Promise.all(tokenIds.map(async (tokenId) =>{
+          const auction = await contract.getAuction(contractsData.erc721Contracts, tokenId);
           const currentTime = Math.floor(Date.now() / 1000);
           const isAuctionOpen = currentTime >= auction.startTime && currentTime <= auction.endOfRevealPeriod;
           const timeLeft = isAuctionOpen ? auction.endOfRevealPeriod - currentTime : 0;
@@ -35,8 +49,20 @@ const VickeryAuctionTable = ({ contractAddress }) => {
     fetchAuctions();
   }, [contractAddress]);
 
-  const handleBidSubmit = (auction) => {
-    // Implement bid submission logic here
+  const handleBidSubmit = async (auction: Auction) => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, TokenizedVickeryAuctionArtifact.abi, signer);    // Assuming you have an input field for entering the bid amount
+      const bidAmount = 1000; // Replace with the actual bid amount    // Encode the bid amount using ethers
+      const encodedBidAmount = ethers.utils.defaultAbiCoder.encode(['uint96'], [bidAmount]);    // Call the contract’s submitBid function
+      const tx = await contract.submitBid(auction.tokenId, encodedBidAmount);    // Wait for the transaction to be confirmed
+      await tx.wait();    
+      window.alert('Bid submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting bid:', error);
+      window.alert('Error submitting bid. Please try again.');
+    }
   };
 
   return (
